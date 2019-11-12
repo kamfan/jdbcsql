@@ -1,3 +1,5 @@
+import org.json.JSONArray;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +33,9 @@ public class Main {
         updateValues.put("LastName", "Jasiek");
         updateValues.put("Age", "15");
 
-        crudStatementSQL.updateSQLbyJDBC(updateValues, tableName, "where id = 2");
+//        crudStatementSQL.updateSQLbyJDBC(updateValues, tableName, "where id = 2");
+//        crudStatementSQL.deleteSQLbyJDBC(tableName, "id = 8");
+//        crudStatementSQL.addEmployee();
+        System.out.println(new JSONArray("http://dummy.restapie));
     }
 }

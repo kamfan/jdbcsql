@@ -1,4 +1,8 @@
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +75,7 @@ public class CRUDStatementSQL {
         return statement;
     }
 
-    public Statement deleteSQLbyJDBC(Map<String,String> updateQuery,String tableName, String whereCondition) {
+    public Statement deleteSQLbyJDBC(String tableName, String whereCondition) {
         Statement statement= null;
         try {
             statement = conn.createStatement();
@@ -79,24 +83,46 @@ public class CRUDStatementSQL {
             sb.append("DELETE ");
             sb.append(tableName);
             sb.append(" WHERE ");
-
-            int i=0;
-            for(Map.Entry<String, String> entry : updateQuery.entrySet()) {
-                if( i < updateQuery.entrySet().size()-1) {
-                    sb.append(entry.getKey() + " = " + "'" + entry.getValue() +"'" + ", ");
-                    i++;
-                }
-                else {
-                    sb.append(entry.getKey() + " = " + "'" + entry.getValue() +"'" + " ");
-                }
-            }
             sb.append(whereCondition);
             System.out.println(sb);
-            statement.executeUpdate(sb.toString());
+            statement.executeQuery(sb.toString());
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return statement;
     }
-
+//    public Statement addEmployee() {
+//        JSONArray jsonArrayEmployees = new JSONArray("http://dummy.restapiexample.com/api/v1/employees");
+//        List<Employee> employeesList = new ArrayList<>();
+//
+//        for (int i = 0; i < jsonArrayEmployees.length(); i++) {
+//            JSONObject one = (JSONObject) jsonArrayEmployees.get(i);
+//            Employee employee = new Employee();
+//            employee.setId(Integer.parseInt(one.get("id").toString()));
+//            employee.setAge(Double.parseDouble(one.get("employee_age").toString()));
+//            employee.setName(one.get("employee_name").toString());
+//            employee.setSalary(Double.parseDouble(one.get("employee_salary").toString()));
+//            employeesList.add(employee);
+//        }
+//
+//        Statement statement = null;
+//        try {
+//            statement = conn.createStatement();
+//            StringBuilder sb = new StringBuilder();
+//            for (Employee e : employeesList) {
+//                sb.append("INSERT INTO Employees (LastName, FirstName, Address, City, Salary, Age, StartJobDate, Benefit) VALUES (");
+//                sb.append(e.getName());
+//                sb.append(", 'default', 'default', 'default', ");
+//                sb.append(e.getSalary());
+//                sb.append(", ");
+//                sb.append(e.getAge());
+//                sb.append(", default, default);");
+//                System.out.println(sb);
+//                statement.executeQuery(sb.toString());
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return statement;
+//    }
 }
