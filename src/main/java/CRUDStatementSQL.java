@@ -71,4 +71,32 @@ public class CRUDStatementSQL {
         return statement;
     }
 
+    public Statement deleteSQLbyJDBC(Map<String,String> updateQuery,String tableName, String whereCondition) {
+        Statement statement= null;
+        try {
+            statement = conn.createStatement();
+            StringBuilder sb = new StringBuilder();
+            sb.append("DELETE ");
+            sb.append(tableName);
+            sb.append(" WHERE ");
+
+            int i=0;
+            for(Map.Entry<String, String> entry : updateQuery.entrySet()) {
+                if( i < updateQuery.entrySet().size()-1) {
+                    sb.append(entry.getKey() + " = " + "'" + entry.getValue() +"'" + ", ");
+                    i++;
+                }
+                else {
+                    sb.append(entry.getKey() + " = " + "'" + entry.getValue() +"'" + " ");
+                }
+            }
+            sb.append(whereCondition);
+            System.out.println(sb);
+            statement.executeUpdate(sb.toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return statement;
+    }
+
 }

@@ -4,7 +4,7 @@ public class SQLConnection {
     private Connection connection;
 
     public Connection connectionToSQLServer() {
-        String url = "jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=CONNECTIS;integratedSecurity=true;";
+        String url = "jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=baza;integratedSecurity=true;";
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
